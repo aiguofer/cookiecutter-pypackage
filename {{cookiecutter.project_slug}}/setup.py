@@ -13,7 +13,21 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
+# get the dependencies and installs
+with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
+    all_reqs = f.read().split('\n')
+
+install_requires = [x.strip() for x in all_reqs if 'git+' not in x]
+dependency_links = [x.strip().replace('git+', '') for x in all_reqs
+                    if x.startswith('git+')]
+
+# get the dependencies and installs
+with open(path.join(here, 'requirements_dev.txt'), encoding='utf-8') as f:
+    dev_requires = f.read().split('\n')
+
+{%- if cookiecutter.command_line_interface|lower == 'click' %}
+install_requires += ['Click>=6.0']
+{%- endif %}
 
 setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
 
@@ -52,7 +66,8 @@ setup(
         ],
     },
     {%- endif %}
-    install_requires=requirements,
+    install_requires=install_requires,
+    dependency_links=dependency_links,
 {%- if cookiecutter.open_source_license in license_classifiers %}
     license="{{ cookiecutter.open_source_license }}",
 {%- endif %}
@@ -64,6 +79,9 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
+    extras_require={
+        'dev': dev_requires
+    },
     url='{{ cookiecutter.git_host }}/{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}',
     version=__version__,
     zip_safe=False,
