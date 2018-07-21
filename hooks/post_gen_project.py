@@ -18,11 +18,12 @@ if __name__ == '__main__':
         remove_file('tests/__init__.py')
 
     if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
-        cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
+        cli_file = os.path.join('{{ cookiecutter.package_name }}', 'cli.py')
         remove_file(cli_file)
 
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
 
     if '{{ cookiecutter.use_travis  }}' != 'y':
-        remove_file('{{ cookiecutter.project_slug }}/.travis.yml')
+        filename = os.path.join('{{ cookiecutter.package_name }}', '.travis.yml')
+        remove_file(filename)
