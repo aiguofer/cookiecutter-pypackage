@@ -15,7 +15,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at {{ cookiecutter.git_host }}{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}/issues.
+Report bugs at {{ cookiecutter.git_host }}/{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}/issues.
 
 If you are reporting a bug, please include:
 
@@ -45,7 +45,7 @@ articles, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at {{ cookiecutter.git_host }}{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}/issues.
+The best way to send feedback is to file an issue at {{ cookiecutter.git_host }}/{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}/issues.
 
 If you are proposing a feature:
 
@@ -62,7 +62,7 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
 1. Fork the `{{ cookiecutter.project_slug }}` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/{{ cookiecutter.project_slug }}.git
+    $ git clone git@{{ cookiecutter.git_host | replace("https://", "")}}:{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
@@ -79,7 +79,7 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
 5. When you're done making changes, check that your changes pass flake8 and the
    tests, including testing other Python versions with tox::
 
-    $ flake8 {{ cookiecutter.project_slug }} tests
+    $ flake8 {{ cookiecutter.package_name }} tests
     $ python setup.py test or py.test
     $ tox
 
@@ -112,9 +112,9 @@ Tips
 To run a subset of tests::
 
 {% if cookiecutter.use_pytest == 'y' -%}
-    $ py.test tests.test_{{ cookiecutter.project_slug }}
+    $ py.test tests.test_{{ cookiecutter.package_name }}
 {% else %}
-    $ python -m unittest tests.test_{{ cookiecutter.project_slug }}
+    $ python -m unittest tests.test_{{ cookiecutter.package_name }}
 {%- endif %}
 
 Deploying
