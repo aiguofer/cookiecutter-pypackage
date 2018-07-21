@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """The setup script."""
-
+from os import path
+from codecs import open
 from setuptools import setup, find_packages
+
+here = path.abspath(path.dirname(__file__))
 
 exec(open('{{ cookiecutter.package_name }}/_version.py').read())
 
