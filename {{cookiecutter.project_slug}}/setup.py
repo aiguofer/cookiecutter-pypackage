@@ -5,6 +5,8 @@
 
 from setuptools import setup, find_packages
 
+exec(open('{{ cookiecutter.package_name }}/_version.py').read())
+
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
@@ -46,7 +48,7 @@ setup(
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
+            '{{ cookiecutter.package_name }}={{ cookiecutter.package_name }}.cli:main',
         ],
     },
     {%- endif %}
@@ -56,13 +58,13 @@ setup(
 {%- endif %}
     long_description=readme + '\n\n' + history,
     include_package_data=True,
-    keywords='{{ cookiecutter.project_slug }}',
-    name='{{ cookiecutter.project_slug }}',
-    packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
+    keywords='{{ cookiecutter.package_name }}',
+    name='{{ cookiecutter.package_name }}',
+    packages=find_packages(include=['{{ cookiecutter.package_name }}']),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
-    version='{{ cookiecutter.version }}',
+    url='{{ cookiecutter.git_host }}{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}',
+    version=__version__,
     zip_safe=False,
 )

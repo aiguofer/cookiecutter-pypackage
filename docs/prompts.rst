@@ -14,7 +14,7 @@ full_name
 email
     Your email address.
 
-github_username
+git_host_username
     Your GitHub username.
 
 project_name
