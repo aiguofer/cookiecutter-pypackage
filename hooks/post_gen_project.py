@@ -25,5 +25,4 @@ if __name__ == '__main__':
         remove_file('LICENSE')
 
     if '{{ cookiecutter.use_travis  }}' != 'y':
-        filename = os.path.join('{{ cookiecutter.package_name }}', '.travis.yml')
-        remove_file(filename)
+        remove_file('.travis.yml')
