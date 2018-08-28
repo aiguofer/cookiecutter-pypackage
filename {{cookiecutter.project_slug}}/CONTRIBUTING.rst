@@ -64,11 +64,12 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
 
     $ git clone git@{{ cookiecutter.git_host | replace("https://", "")}}:{{ cookiecutter.git_host_username }}/{{ cookiecutter.project_slug }}.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtualenv (optional). Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv {{ cookiecutter.project_slug }}
+    $ mkvirtualenv {{ cookiecutter.project_slug }} # optional
     $ cd {{ cookiecutter.project_slug }}/
-    $ python setup.py develop
+    $ pip install -e .[dev]
+    $ pre-commit install
 
 4. Create a branch for local development::
 
@@ -91,7 +92,7 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
     $ git commit -m "Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
 
-7. Submit a pull request through the GitHub website.
+7. Submit a pull/merge request through the website.
 
 Pull Request Guidelines
 -----------------------
@@ -125,7 +126,6 @@ Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
 $ bumpversion patch # possible: major / minor / patch
-$ git push
-$ git push --tags
+$ git push origin master --tags
 
 Travis will then deploy to PyPI if tests pass.
